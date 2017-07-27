@@ -1,6 +1,7 @@
 package com.michol.api.model.request;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
@@ -9,9 +10,11 @@ import java.io.Serializable;
 public class VerifyUserModel implements Serializable{
 
     @NotEmpty
+    @ApiModelProperty(value = "generated user token", allowableValues = "token", required = true)
     private String token;
 
     @NotEmpty
+    @ApiModelProperty(value = "login", allowableValues = "login", required = true)
     private String userLogin;
 
     public VerifyUserModel() {

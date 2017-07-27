@@ -10,18 +10,22 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable{
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long id;
-    @Column(name = "user_login", nullable = false)
+    @Column(name = "user_login", nullable = false, unique = true)
     private String login;
     @Column(name = "user_password", nullable = false)
     private String password;
     @Column(name = "user_token", nullable = true)
     private String token;
+    @Column(name = "user_blocked", nullable = false)
+    private boolean blocked;
+    @Column(name = "user_mail", nullable = false, unique = true)
+    private String email;
 
     public User() {
     }
@@ -56,6 +60,22 @@ public class User implements Serializable{
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
 

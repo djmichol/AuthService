@@ -8,4 +8,6 @@ public interface UserDao {
 
     User create(User user);
 
+    String getUserToken(String login);
+
 }

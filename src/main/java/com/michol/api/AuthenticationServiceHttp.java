@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping(AuthenticationServiceHttp.PATH)
@@ -24,7 +26,7 @@ public class AuthenticationServiceHttp {
     }
 
     @RequestMapping(value = "verify", method = RequestMethod.POST)
-    public ResponseEntity<VerifyUserResponseModel> verify(@RequestBody VerifyUserModel verifyUserModel) {
+    public ResponseEntity<VerifyUserResponseModel> verify(@RequestBody @Valid VerifyUserModel verifyUserModel) {
         if(authenticator.validateToken(verifyUserModel.getUserLogin(), verifyUserModel.getToken())) {
             return new ResponseEntity<>(new VerifyUserResponseModel(true), HttpStatus.OK);
         }else{

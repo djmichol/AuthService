@@ -27,7 +27,8 @@ public class AuthenticatorImpl implements Authenticator {
 
     @Override
     public boolean validateToken(String userName, String token) {
-        return true;
+        String userToken= userDao.getUserToken(userName);
+        return userToken.equals(token);
     }
 
     @Override

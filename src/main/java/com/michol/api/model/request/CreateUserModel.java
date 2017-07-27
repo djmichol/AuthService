@@ -1,6 +1,5 @@
 package com.michol.api.model.request;
 
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Email;
@@ -8,26 +7,29 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
 
-@ApiModel(description = "User login data")
-public class LoginUserModel implements Serializable{
+@ApiModel(description = "New user data")
+public class CreateUserModel implements Serializable {
 
     @NotEmpty
     @ApiModelProperty(value = "login", allowableValues = "login", required = true)
-    private String userName;
-
+    private String login;
     @NotEmpty
     @ApiModelProperty(value = "password", allowableValues = "password", required = true)
     private String password;
+    @NotEmpty
+    @Email
+    @ApiModelProperty(value = "email", allowableValues = "emial@email.com", required = true)
+    private String email;
 
-    public LoginUserModel() {
+    public CreateUserModel() {
     }
 
-    public String getUserName() {
-        return userName;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -38,4 +40,11 @@ public class LoginUserModel implements Serializable{
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
