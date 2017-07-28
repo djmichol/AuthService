@@ -7,6 +7,7 @@ import com.michol.dao.model.User;
 public class TokenServiceImpl implements TokenService{
     @Override
     public VerifyUserResponseModel validateToken(String token) {
+        //TODO
         if(token.equals("token")) {
             return VerifyUserResponseModel.verified();
         }
@@ -15,6 +16,7 @@ public class TokenServiceImpl implements TokenService{
 
     @Override
     public String generateToken(User user) {
+        //TODO
         return "token";
     }
 }
