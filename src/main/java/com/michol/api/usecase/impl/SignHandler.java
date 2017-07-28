@@ -24,7 +24,8 @@ public class SignHandler implements RequestHandler<CreateUserModel, SignResponse
     @Override
     public SignResponseModel handle(CreateUserModel createUserModel) {
         User createdUser = userDao.create(loginUserModelToUserConverter.convert(createUserModel));
-        VerifyPasswordModel verifyPasswordModel = authenticator.verifyPassword(createdUser.getLogin(), createdUser.getPassword());
+        VerifyPasswordModel verifyPasswordModel = authenticator.verifyPassword(createdUser.getLogin(), createUserModel.getPassword());
+        createdUser.setToken(authenticator.generateToken(createUserModel.getLogin()));
         SignResponseModel signResponseModel = new SignResponseModel(createdUser.getToken(), verifyPasswordModel, true);
         return signResponseModel;
     }

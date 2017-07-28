@@ -10,6 +10,16 @@ public class VerifyPasswordModel implements Serializable {
 
     private boolean userLocked;
 
+    private VerifyPasswordModel(boolean authenticated, boolean canChangePassword, boolean userLocked) {
+        this.authenticated = authenticated;
+        this.canChangePassword = canChangePassword;
+        this.userLocked = userLocked;
+    }
+
+    public static VerifyPasswordModel unauthorized(){
+        return new VerifyPasswordModel(false,false,false);
+    }
+
     public boolean isAuthenticated() {
         return authenticated;
     }

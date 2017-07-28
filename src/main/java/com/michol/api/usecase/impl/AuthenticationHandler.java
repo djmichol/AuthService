@@ -15,9 +15,12 @@ public class AuthenticationHandler implements RequestHandler<VerifyUserModel, Ve
 
     @Override
     public VerifyUserResponseModel handle(VerifyUserModel verifyUserModel) {
-        if(authenticator.validateToken(verifyUserModel.getUserLogin(), verifyUserModel.getToken())) {
+        VerifyUserResponseModel verifyUserResponseModel = authenticator.validateToken(verifyUserModel.getUserLogin(), verifyUserModel.getToken());
+        if (verifyUserResponseModel.isAuthenticationVerified()) {
             return VerifyUserResponseModel.verified();
-        }else{
+        } else if (verifyUserResponseModel.isTokenExpired()) {
+            return VerifyUserResponseModel.tokenExppired();
+        } else {
             return VerifyUserResponseModel.notVerified();
         }
     }

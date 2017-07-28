@@ -2,16 +2,20 @@ package com.michol.api.converter;
 
 import com.michol.api.model.request.CreateUserModel;
 import com.michol.auth.Authenticator;
+import com.michol.auth.HashService;
 import com.michol.dao.model.User;
 import com.michol.utils.Utils;
 import org.springframework.core.convert.converter.Converter;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 public class LoginUserModelToUserConverter implements Converter<CreateUserModel, User> {
 
-    private Authenticator authenticator;
+    private HashService hashService;
 
-    public LoginUserModelToUserConverter(Authenticator authenticator) {
-        this.authenticator = authenticator;
+    public LoginUserModelToUserConverter(HashService hashService) {
+        this.hashService = hashService;
     }
 
     @Override
@@ -19,8 +23,11 @@ public class LoginUserModelToUserConverter implements Converter<CreateUserModel,
         if(createUserModel!=null){
             User user = new User();
             user.setLogin(createUserModel.getLogin());
-            user.setPassword(createUserModel.getPassword());
-            user.setToken(authenticator.generateToken(createUserModel.getLogin(), Utils.nextSessionId()));
+            try {
+                user.setPassword(hashService.generateStrongPasswordHash(createUserModel.getPassword()));
+            } catch (Exception e) {
+               return null;
+            }
             user.setBlocked(false);
             user.setEmail(createUserModel.getEmail());
             return user;

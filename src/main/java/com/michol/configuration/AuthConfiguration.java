@@ -1,7 +1,11 @@
 package com.michol.configuration;
 
 import com.michol.auth.Authenticator;
+import com.michol.auth.HashService;
+import com.michol.auth.TokenService;
 import com.michol.auth.impl.AuthenticatorImpl;
+import com.michol.auth.impl.HashServiceImpl;
+import com.michol.auth.impl.TokenServiceImpl;
 import com.michol.dao.UserDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,8 +30,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class AuthConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
-    public Authenticator authenticator(UserDao userDao){
-        return new AuthenticatorImpl(userDao);
+    public Authenticator authenticator(UserDao userDao, HashService hashService, TokenService tokenService){
+        return new AuthenticatorImpl(userDao, hashService, tokenService);
+    }
+
+    @Bean
+    public HashService hashService(){
+        return new HashServiceImpl();
+    }
+
+    @Bean
+    public TokenService tokenService(){
+        return new TokenServiceImpl();
     }
 
     @Bean

@@ -12,4 +12,6 @@ public interface UserDao {
 
     void changePassword(String login, String newPassword);
 
+    void updateToken(String login, String token);
+
 }

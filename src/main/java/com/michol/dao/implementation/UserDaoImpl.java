@@ -43,6 +43,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @Transactional
+    public void updateToken(String login, String token) {
+        User data = this.get(login);
+        if (data != null) {
+            data.setToken(token);
+            entityManager.merge(data);
+        }
+    }
+
+    @Override
+    @Transactional
     public User create(User user) {
         entityManager.persist(user);
         entityManager.flush();

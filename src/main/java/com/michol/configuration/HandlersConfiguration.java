@@ -7,6 +7,7 @@ import com.michol.api.usecase.impl.ChangePasswordHandler;
 import com.michol.api.usecase.impl.LoginHandler;
 import com.michol.api.usecase.impl.SignHandler;
 import com.michol.auth.Authenticator;
+import com.michol.auth.HashService;
 import com.michol.dao.UserDao;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -31,8 +32,8 @@ public class HandlersConfiguration {
     }
 
     @Bean
-    public ChangePasswordHandler changePasswordHandler(Authenticator authenticator, UserDao userDao) {
-        return new ChangePasswordHandler(authenticator, userDao);
+    public ChangePasswordHandler changePasswordHandler(Authenticator authenticator, UserDao userDao, HashService hashService) {
+        return new ChangePasswordHandler(authenticator, userDao, hashService);
     }
 
     @Bean
