@@ -10,4 +10,6 @@ public interface UserDao {
 
     String getUserToken(String login);
 
+    void changePassword(String login, String newPassword);
+
 }

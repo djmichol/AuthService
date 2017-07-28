@@ -33,6 +33,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @Transactional
+    public void changePassword(String login, String newPassword) {
+        User data = this.get(login);
+        if (data != null) {
+            data.setPassword(newPassword);
+            entityManager.merge(data);
+        }
+    }
+
+    @Override
+    @Transactional
     public User create(User user) {
         entityManager.persist(user);
         entityManager.flush();

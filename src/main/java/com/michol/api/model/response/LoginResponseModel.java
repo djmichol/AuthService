@@ -16,6 +16,10 @@ public class LoginResponseModel implements Serializable{
         this.verifyPasswordModel = verifyPasswordModel;
     }
 
+    public LoginResponseModel(VerifyPasswordModel verifyPasswordModel) {
+        this.verifyPasswordModel = verifyPasswordModel;
+    }
+
     public String getToken() {
         return token;
     }

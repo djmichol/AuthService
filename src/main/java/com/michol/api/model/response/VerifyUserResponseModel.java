@@ -6,8 +6,16 @@ public class VerifyUserResponseModel implements Serializable{
 
     private boolean authenticationVerified;
 
-    public VerifyUserResponseModel(boolean authenticationVerified) {
+    private VerifyUserResponseModel(boolean authenticationVerified) {
         this.authenticationVerified = authenticationVerified;
+    }
+
+    public static VerifyUserResponseModel verified(){
+        return new VerifyUserResponseModel(true);
+    }
+
+    public static VerifyUserResponseModel notVerified(){
+        return new VerifyUserResponseModel(false);
     }
 
     public boolean isAuthenticationVerified() {
