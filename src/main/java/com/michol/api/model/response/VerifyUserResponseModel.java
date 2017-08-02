@@ -21,8 +21,8 @@ public class VerifyUserResponseModel implements Serializable{
         return new VerifyUserResponseModel(false, false);
     }
 
-    public static VerifyUserResponseModel tokenExppired(){
-        return new VerifyUserResponseModel(false, false);
+    public static VerifyUserResponseModel tokenExpired(){
+        return new VerifyUserResponseModel(false, true);
     }
 
     public boolean isTokenExpired() {

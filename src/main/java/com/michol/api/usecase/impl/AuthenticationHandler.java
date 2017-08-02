@@ -19,7 +19,7 @@ public class AuthenticationHandler implements RequestHandler<VerifyUserModel, Ve
         if (verifyUserResponseModel.isAuthenticationVerified()) {
             return VerifyUserResponseModel.verified();
         } else if (verifyUserResponseModel.isTokenExpired()) {
-            return VerifyUserResponseModel.tokenExppired();
+            return VerifyUserResponseModel.tokenExpired();
         } else {
             return VerifyUserResponseModel.notVerified();
         }

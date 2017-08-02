@@ -10,6 +10,7 @@ import com.michol.dao.UserDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.env.Environment;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -22,6 +23,8 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.io.UnsupportedEncodingException;
 
 @Configuration
 @EnableSwagger2
@@ -40,8 +43,8 @@ public class AuthConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public TokenService tokenService(){
-        return new TokenServiceImpl();
+    public TokenService tokenService(Environment environment) throws UnsupportedEncodingException {
+        return new TokenServiceImpl(environment);
     }
 
     @Bean

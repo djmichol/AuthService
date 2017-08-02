@@ -42,7 +42,7 @@ public class AuthenticatorImpl implements Authenticator {
     public VerifyUserResponseModel validateToken(String userName, String token) {
         String userToken = userDao.getUserToken(userName);
         if(userToken.equals(token)){
-            return tokenService.validateToken(userToken);
+            return tokenService.validateToken(userToken, userName);
         }
         return VerifyUserResponseModel.notVerified();
     }
